@@ -16,7 +16,7 @@ Put your sudo password in the file "passwd" in the current directory. Then,
 cat passwd | sudo --stdin chmod 600 passwd
 ```
 ```bash
-cat passwd | sudo --stdin bash setup.bash
+cat passwd | sudo --stdin whoami && sudo bash setup.bash
 ```
 # Run Super Odometry locally
 Under the "operations" folder, sepcify configurations in the file "config.json". See the **Configurations** section for detail. Then,
