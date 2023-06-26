@@ -1,14 +1,14 @@
-
 # Environment setup (on the machine that will run Super Odometry)
 ```bash
-git clone https://YOUR_GITHUB_TOKEN@github.com/water-horse/subt_localization_ws
 ## Please tell me your GitHub ID and I will give you access to this repo :)
+git clone https://YOUR_GITHUB_TOKEN@github.com/water-horse/subt_localization_ws
 ```
 ```bash
 cd subt_localization_ws/operations
 ```
 ```bash
-## Make sure there is no error running the following script (you may need to, for example, pip3 install bagpy)
+## Make sure there is no error running the following script
+## You may need to, for example, pip3 install bagpy.
 python3 check_import.py
 ```
 Put your sudo password in the file "passwd" in the current directory. Then,
@@ -23,11 +23,11 @@ Under the "operations" folder, sepcify configurations in the file "config.json".
 ```bash
 python3 driver_local.py --config config.json --mode MODE [--dataset-index INDEX]
 ```
-MODE is 0 or 1, where 0 means SLAM mode and 1 means localization mode.
-
-INDEX is the index of the array of objects in the JSON file. If you don't specify this index, the driver will run all datasets one after another as specified in the JSON file. If you specify this index, the driver will only run the corresponding dataset.
-
-Everytime a next dataset is to be processed, a Tmux terminal will pop up and will disappear when the current dataset is finished. To kill the Python program with side effects, run the following script in a new terminal under the same folder **when there is a Tmux terminal alive**.
+MODE is 0 or 1, where 0 means SLAM mode and 1 means localization mode.  
+  
+INDEX is the index of the array of objects in the JSON file. If you don't specify this index, the driver will run all datasets one after another as specified in the JSON file. If you specify this index, the driver will only run the corresponding dataset.  
+  
+Everytime a dataset is to be processed, a Tmux terminal will pop up and will disappear when the dataset is finished. To kill the Python program without side effects, run the following script in a new terminal under the same folder **when there is a Tmux terminal alive**.
 ```bash
 cat passwd | sudo --stdin bash escape.bash
 ```
@@ -55,7 +55,11 @@ Sepcify configurations in the file "config.json". See the **Configurations** sec
 ```bash
 python3 driver_remote.py --config config.json --mode MODE [--dataset-index INDEX]
 ```
-The meaning of parameters is the same as that in the **Run Super Odometry locally** section. To kill the Python program without side effects, do the following in a new terminal under the same folder **when there is a Tmux terminal alive**.
+MODE is 0 or 1, where 0 means SLAM mode and 1 means localization mode.  
+  
+INDEX is the index of the array of objects in the JSON file. If you don't specify this index, the driver will run all datasets one after another as specified in the JSON file. If you specify this index, the driver will only run the corresponding dataset.  
+  
+Everytime a dataset is to be processed, a Tmux terminal will pop up and will disappear when the dataset is finished. To kill the Python program without side effects, do the following in a new terminal under the same folder **when there is a Tmux terminal alive**.
 ```bash
 export SSH_HOST="username@ipaddress"
 ```
@@ -65,12 +69,10 @@ export SSH_WORKSPACE="/the/absolute/path/to/the/git/repo/on/the/remote/machine"
 ```bash
 bash escape.bash
 ```
-Note: when all the datasets are finished, the Tmux terminal will not automatically disappear.
-Note: roscore runs on port number 11411 on the remote machine.
-
+Note: when all the datasets are finished, the Tmux terminal will not automatically disappear.  
+Note: roscore runs on the port 11411 on the remote machine.
 # Configurations
 This section describes how to specify dataset configurations in the file "config.json". The fields in this JSON file are
-
 - datapath
 	> The absolute path of a folder where bag files of a single dataset are stored. This is a path on the machine that will run Super Odometry.
 - namespace
@@ -80,10 +82,10 @@ This section describes how to specify dataset configurations in the file "config
 - cloudpath
 	> The absolute path of the ground truth cloud on the machine that will run Super Odometry.
 - outputpath
-	> The absolute path of a folder where the results will be stored. This is a path on the machine that will run Super Odometry.
+	> The absolute path of an existing folder where the results will be stored. This is a path on the machine that will run Super Odometry.
 - start_time
 	> This is the relative time in seconds to the beginning of bag files. The bag files will be played from this start time.
 - end_time
-	> This is the relative time in seconds to the beginning of bag files. The bag files will stop being played at this end time. If you want bag files to be played to the end, set this field to -1.
-
-It is recommended that **datapath**, **cloudpath** and **outputpath** share a long common path because this common path will be mapped to the docker container.
+	> This is the relative time in seconds to the beginning of bag files. The bag files will stop playing at this end time. If you want bag files to play to the end, set this field to -1.
+	
+It is recommended that **datapath**, **cloudpath** and **outputpath** share a long common path because this common path will be mapped to the docker container.  
