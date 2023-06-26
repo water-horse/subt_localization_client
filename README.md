@@ -7,7 +7,7 @@ git clone https://YOUR_GITHUB_TOKEN@github.com/water-horse/subt_localization_ws
 cd subt_localization_ws/operations
 ```
 ```bash
-## Make sure there is no error running the following script
+## Make sure there is no error running the following script.
 ## You may need to, for example, pip3 install bagpy.
 python3 check_import.py
 ```
@@ -36,6 +36,10 @@ Note: when all the datasets are finished, the Tmux terminal will not automatical
 Make sure the steps in the **Environment setup** section is done on the remote machine. Then, on the local machine,
 ```bash
 git clone https://github.com/water-horse/subt_localization_client && cd subt_localization_client
+```
+```bash
+## Make sure there is no error running the following script.
+python3 check_import.py
 ```
 Put your sudo password in the file "userpasswd" in the current directory. Then,
 ```bash
