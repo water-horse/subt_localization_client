@@ -9,7 +9,7 @@ import subprocess
 
 def escape_func(sec_wait):
     time.sleep(sec_wait)
-    os.system("cat passwd | sudo --stdin docker stop super_odom")
+    os.system("cat userpasswd | sudo --stdin docker stop super_odom")
     os.system("tmux kill-session -t subt_localization")
 
 if __name__ == "__main__":
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     for i in range(len(configs)):
         config = configs[i]
-        response = subprocess.check_output("sshpass -f passwd ssh " + ssh_host + \
+        response = subprocess.check_output("sshpass -f sshpasswd ssh " + ssh_host + \
             " -t \"python3 " + ssh_workspace + "/operations/read_bag.py " + \
             config["datapath"] + " " + str(config["start_time"]) + " " + str(config["end_time"]) + "\"", shell=True).decode()
         if response.startswith("ERROR"):
