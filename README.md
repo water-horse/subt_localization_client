@@ -1,10 +1,13 @@
 # Environment setup (on the machine that will run Super Odometry)
 ```bash
-## Please tell me your GitHub ID and I will give you access to this repo :)
-git clone https://YOUR_GITHUB_TOKEN@github.com/water-horse/subt_localization_ws
+git clone https://github.com/water-horse/subt_localization_ws && cd subt_localization_ws
 ```
 ```bash
-cd subt_localization_ws/operations
+## Authentication is required to access the repository of Super Odometry.
+wstool init && wstool merge dependencies.rosinstall && wstool update
+```
+```bash
+cd operations
 ```
 ```bash
 ## Make sure there is no error running the following script.
@@ -91,5 +94,7 @@ This section describes how to specify dataset configurations in the file "config
 	> This is the relative time in seconds to the beginning of bag files. The bag files will be played from this start time.
 - end_time
 	> This is the relative time in seconds to the beginning of bag files. The bag files will stop playing at this end time. If you want bag files to play to the end, set this field to -1.
-	
+
+When the driver is in SLAM mode, **dataconfig** and **cloudpath** have no effect on Super Odometry and they can be non-existing.  
+
 It is recommended that **datapath**, **cloudpath** and **outputpath** share a long common path because this common path will be mapped to the docker container.  
