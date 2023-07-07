@@ -9,7 +9,7 @@ import subprocess
 
 def escape_func(sec_wait):
     time.sleep(sec_wait)
-    os.system("cat userpasswd | sudo --stdin docker stop super_odom")
+    os.system("sshpass -f sshpasswd ssh ${SSH_HOST} -t \"cat ${SSH_WORKSPACE}/operations/passwd | sudo --stdin docker stop super_odom\"")
     os.system("tmux kill-session -t subt_localization")
 
 if __name__ == "__main__":
