@@ -76,7 +76,7 @@ windows:
         - if [ ${IS_LOCALIZATION} == 1 ]; then rosbag record --duration=${DURATION} /uncertainty_X /uncertainty_Y /uncertainty_Z /uncertainty_pitch /uncertainty_roll /uncertainty_yaw /super_odometry_stats /prediction_source /velodyne_points /velodyne_points /camera_1/image_raw /imu/data /velodyne_cloud_registered_imu /velodyne_cloud_registered /super_odometry_stats /prediction_source /aft_mapped_to_init_imu /aft_mapped_to_init /aft_mapped_to_init_incremental /integrated_to_init integrated_to_init2 /integrated_to_init_imu /integrated_to_init_incremental /integrated_to_global /accel_bias /gyro_bias; fi
       - shell_command:
         - sleep 1
-        - if [ ${IS_LOCALIZATION} == "1" ]; then sleep ${DURATION}; fi
+        - if [ ${IS_LOCALIZATION} == 1 ]; then sleep ${DURATION}; fi
         - sshpass -f sshpasswd ssh ${SSH_HOST} -t "cd ${SSH_WORKSPACE}/operations; export IS_LOCALIZATION=${IS_LOCALIZATION}; bash"
         - cat passwd | sudo --stdin whoami
         - sudo docker exec --privileged -e IS_LOCALIZATION=${IS_LOCALIZATION} -it super_odom bash
