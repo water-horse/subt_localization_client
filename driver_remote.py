@@ -39,8 +39,8 @@ if __name__ == "__main__":
     for i in range(len(configs)):
         config = configs[i]
         response = subprocess.check_output("sshpass -f sshpasswd ssh " + ssh_host + \
-            " -t \"python3 " + ssh_workspace + "/operations/read_bag.py " + \
-            config["datapath"] + " " + str(config["start_time"]) + " " + str(config["end_time"]) + "\"", shell=True).decode()
+            " -t \"python3 '" + ssh_workspace + "/operations/read_bag.py' '" + \
+            config["datapath"] + "' " + str(config["start_time"]) + " " + str(config["end_time"]) + "\"", shell=True).decode()
         if response.startswith("ERROR"):
             assert False, "Number of bags in the data folder, \033[91m{}\033[0m should be non-zero".format(
                 config["datapath"]
